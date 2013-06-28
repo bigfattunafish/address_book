@@ -1,6 +1,15 @@
 <h1>My Address Book</h1>
 <p>Here's a list of people in my address book:</p>
-<p>PLACEHOLDER, NOTHING FOR NOW</p>
+
+<% sql_display = "select * from contacts" %>
+<% @db_accessed.exec(sql_display) do |result| %>
+  <ul>
+    <li><% result.each do |column| %>
+      <%= column %>
+    <% end %></li>
+  </ul>
+<% end %>
+<% @db_accessed.close %>
 
 <p>If you don't suck at life and want to get on my address book, enter your information below:</p>
 <form action="/" method="post">
