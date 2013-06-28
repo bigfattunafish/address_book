@@ -3,21 +3,22 @@
 
 <% sql_display = "select * from contacts" %>
 <% @db_accessed.exec(sql_display) do |result| %>
-  <ul>
-    <li><% result.each do |column| %>
-      <%= column %>
-    <% end %></li>
-  </ul>
+    <% result.each do |row| %>
+    <ul><li><%= row["first"] %> <%= row["last"] %> (<%= row["age"] %> yrs old, <%= row["gender"] %>): <%= row["phone"] %> (DTGD? <%= row["dtgd"] %>)</li></ul>
+    <% end %>
 <% end %>
 <% @db_accessed.close %>
 
+<br>
 <p>If you don't suck at life and want to get on my address book, enter your information below:</p>
 <form action="/" method="post">
-  <input type="text" name="first" autofocus> Enter your first name here.
-  <input type="text" name="last" autofocus> Enter your last name here.
-  <input type="text" name="age" autofocus> Enter your age here.
-  <input type="text" name="gender" autofocus> Enter your gender here (M or F).
-  <input type="text" name="dtgd" autofocus> Are you down to get down? (true or false)
-  <input type="text" name="number" autofocus> Enter your number here.
+  <ul>
+    <li><input type="text" name="first" autofocus> Enter your first name here</li>
+    <li><input type="text" name="last" autofocus> Enter your last name here</li>
+    <li><input type="text" name="age" autofocus> Enter your age here</li>
+    <li><input type="text" name="gender" autofocus> Enter your gender here (M or F)</li>
+    <li><input type="text" name="dtgd" autofocus> Are you down to get down? (true or false)</li>
+    <li><input type="text" name="phone" autofocus> Enter your number here</li>
+  </ul>
   <button>Submit</button>
 </form>
